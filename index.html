@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolución Empresarial Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            /* Paleta de Oro Real */
+            --brand-gold-primary: #D4AF37; /* Oro metálico principal */
+            --brand-gold-lighter: #FFEA70;  /* Oro más claro para brillos y gradientes */
+            --brand-gold-darker: #B8860B;   /* DarkGoldenRod, para acentos y sombras */
+            
+            --brand-background: #000000; /* Fondo negro sólido */
+            --brand-card-bg: rgba(20, 20, 20, 0.65); /* Fondo de tarjeta oscuro con más opacidad */
+            --brand-text-light: #F3F4F6; /* Gris-100 para texto principal */
+            --brand-text-medium: #A0AEC0; /* Gris más azulado para subtítulos */
+            --brand-text-dark: #4A5568;  /* Gris oscuro azulado */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--brand-background);
+            color: var(--brand-text-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Clases para la nueva paleta de oro */
+        .brand-gold { color: var(--brand-gold-primary); }
+        .brand-gold-bg { background-color: var(--brand-gold-primary); }
+        .brand-gold-border { border-color: var(--brand-gold-primary); }
+        
+        .brand-gold-lighter { color: var(--brand-gold-lighter); }
+        .brand-gold-darker { color: var(--brand-gold-darker); }
+        .brand-gold-darker-bg { background-color: var(--brand-gold-darker); }
+
+
+        .glassmorphic-card {
+            background: var(--brand-card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.25); /* Borde dorado principal sutil */
+            border-radius: 0.75rem; /* 12px */
+        }
+
+        .futuristic-gradient-text {
+            background: linear-gradient(to right, var(--brand-gold-lighter), var(--brand-gold-primary), var(--brand-gold-lighter));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .section-title {
+            font-size: 2.25rem; /* Ajustado para móvil, Tailwind lg:text-4xl */
+            font-weight: 800;
+            margin-bottom: 1rem; /* Ajustado para móvil */
+            text-align: center;
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .section-title {
+                font-size: 2.5rem; /* 40px */
+                margin-bottom: 1.5rem; /* 24px */
+            }
+        }
+        .section-subtitle {
+            font-size: 1rem; /* Ajustado para móvil, Tailwind md:text-xl */
+            color: var(--brand-text-medium);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 2rem; /* Ajustado para móvil */
+        }
+         @media (min-width: 768px) { /* md breakpoint */
+            .section-subtitle {
+                font-size: 1.125rem; /* 18px */
+                 margin: 0 auto 3rem; /* 48px */
+            }
+        }
+
+
+        /* Animaciones sutiles */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Estilo para tabs */
+        .tab-button.active {
+            background-color: var(--brand-gold-primary);
+            color: var(--brand-background); /* Texto negro sobre fondo oro */
+        }
+        .tab-button {
+            transition: all 0.3s ease;
+            color: var(--brand-gold-primary); /* Color de texto para tabs inactivas */
+        }
+        .tab-button:hover {
+            background-color: var(--brand-gold-lighter);
+            color: var(--brand-background);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Estilo para acordeón */
+        .accordion-header {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 7000px; /* Aumentado para textos largos, asegurar que no se corte */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            color: var(--brand-gold-primary);
+        }
+
+        .nav-link {
+             color: var(--brand-text-light);
+        }
+        .nav-link:hover {
+            color: var(--brand-gold-primary);
+        }
+        .contact-button {
+            background-color: var(--brand-gold-primary);
+            color: var(--brand-background); /* Texto oscuro para contraste */
+        }
+        .contact-button:hover {
+            background-color: var(--brand-gold-darker);
+            color: var(--brand-text-light);
+        }
+        .hero-background {
+            background-image: url('https://placehold.co/1920x1080/000000/1C1C1C?text=Universo+Digital+Abstracto');
+        }
+        .footer-bg {
+            background-color: #0A0A0A; 
+            border-top: 1px solid var(--brand-gold-darker);
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 py-3 bg-opacity-80 backdrop-blur-md shadow-lg" style="background-color: rgba(0,0,0,0.75);">
+        <div class="container mx-auto px-4 sm:px-6 flex justify-between items-center">
+            <a href="#" class="text-2xl md:text-3xl font-bold futuristic-gradient-text">Cognito</a>
+            <div class="hidden md:flex space-x-4 lg:space-x-6 items-center">
+                <a href="#filosofia" class="nav-link transition duration-300 text-sm lg:text-base">Filosofía</a>
+                <a href="#metodologia" class="nav-link transition duration-300 text-sm lg:text-base">Metodología</a>
+                <a href="#servicios-adicionales" class="nav-link transition duration-300 text-sm lg:text-base">Servicios</a>
+                <a href="#contacto" class="contact-button font-semibold px-4 py-2 lg:px-6 lg:py-2 rounded-full transition duration-300 text-sm lg:text-base">Contactar</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-300 focus:outline-none p-2">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden" style="background-color: rgba(10,10,10,0.98);">
+            <a href="#filosofia" class="block py-3 px-6 nav-link hover:brand-gold-bg hover:text-black">Filosofía</a>
+            <a href="#metodologia" class="block py-3 px-6 nav-link hover:brand-gold-bg hover:text-black">Metodología</a>
+            <a href="#servicios-adicionales" class="block py-3 px-6 nav-link hover:brand-gold-bg hover:text-black">Servicios</a>
+            <a href="#contacto" class="block py-3 px-6 nav-link hover:brand-gold-bg hover:text-black">Contactar</a>
+        </div>
+    </nav>
+
+    <header class="min-h-screen flex items-center justify-center pt-20 bg-cover bg-center relative hero-background">
+        <div class="absolute inset-0 bg-black opacity-70"></div>
+        <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4 sm:mb-6 reveal">
+                <span class="futuristic-gradient-text"></span> Evoluciona Tu Empresa con Inteligencia Artificial
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 sm:mb-10 max-w-md sm:max-w-xl md:max-w-3xl mx-auto reveal" style="transition-delay: 0.2s;">
+                Transformamos negocios tradicionales en Latinoamérica, integrando IA de forma personalizada, ética y rentable. No solo tecnología, sino una asociación estratégica para tu futuro.
+            </p>
+            <a href="#metodologia" class="contact-button font-bold text-base sm:text-lg px-8 py-3 sm:px-10 sm:py-4 rounded-full transition duration-300 inline-block shadow-xl reveal" style="transition-delay: 0.4s;">
+                Descubre Nuestra Metodología <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </header>
+
+    <section id="filosofia" class="py-16 md:py-24 lg:py-32">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="section-title reveal futuristic-gradient-text">Nuestra Filosofía Central</h2>
+            <p class="section-subtitle reveal">
+                En Cognito, no somos simples proveedores; somos tus socios estratégicos en la evolución digital. Nuestra relación se basa en la confianza, la transparencia y un compromiso genuino con tu éxito a largo plazo.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <div class="glassmorphic-card p-6 md:p-8 text-center reveal">
+                    <div class="text-4xl md:text-5xl brand-gold mb-4 md:mb-6"><i class="fas fa-handshake"></i></div>
+                    <h3 class="text-xl md:text-2xl font-semibold mb-2 md:mb-3 text-white">Valor Compartido</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm">Tu éxito es nuestro éxito. Alineamos nuestros objetivos con los tuyos para crecer juntos.</p>
+                </div>
+                <div class="glassmorphic-card p-6 md:p-8 text-center reveal" style="transition-delay: 0.1s;">
+                    <div class="text-4xl md:text-5xl brand-gold mb-4 md:mb-6"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="text-xl md:text-2xl font-semibold mb-2 md:mb-3 text-white">Relaciones Duraderas</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm">Priorizamos el acompañamiento continuo sobre ganancias únicas, construyendo lealtad.</p>
+                </div>
+                <div class="glassmorphic-card p-6 md:p-8 text-center reveal" style="transition-delay: 0.2s;">
+                    <div class="text-4xl md:text-5xl brand-gold mb-4 md:mb-6"><i class="fas fa-eye"></i></div>
+                    <h3 class="text-xl md:text-2xl font-semibold mb-2 md:mb-3 text-white">Transparencia Total</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm">Claridad en costos y procesos. Creemos en la comunicación abierta y honesta.</p>
+                </div>
+                <div class="glassmorphic-card p-6 md:p-8 text-center reveal" style="transition-delay: 0.3s;">
+                    <div class="text-4xl md:text-5xl brand-gold mb-4 md:mb-6"><i class="fas fa-user-check"></i></div>
+                    <h3 class="text-xl md:text-2xl font-semibold mb-2 md:mb-3 text-white">Inversión en Confianza</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm">Demostramos valor desde el inicio, con diagnósticos accesibles para construir bases sólidas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="metodologia" class="py-16 md:py-24 lg:py-32" style="background-color: #0A0A0A;">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="section-title reveal futuristic-gradient-text">Metodología Cognito Way</h2>
+            <p class="section-subtitle reveal">
+                Un camino estructurado en tres fases fundamentales para guiar tu empresa hacia la transformación inteligente, desde el diagnóstico hasta la evolución continua.
+            </p>
+
+            <div class="tabs-container reveal">
+                <div class="flex flex-col sm:flex-row justify-center mb-8 space-y-2 sm:space-y-0 sm:space-x-2 md:space-x-4">
+                    <button data-tab="fase1" class="tab-button active text-xs sm:text-sm md:text-base font-semibold px-4 py-2 md:px-6 md:py-3 rounded-full border-2 brand-gold-border w-full sm:w-auto">Fase 1: Diagnóstico</button>
+                    <button data-tab="fase2" class="tab-button text-xs sm:text-sm md:text-base font-semibold px-4 py-2 md:px-6 md:py-3 rounded-full border-2 brand-gold-border w-full sm:w-auto">Fase 2: Implementación</button>
+                    <button data-tab="fase3" class="tab-button text-xs sm:text-sm md:text-base font-semibold px-4 py-2 md:px-6 md:py-3 rounded-full border-2 brand-gold-border w-full sm:w-auto">Fase 3: Evolución</button>
+                </div>
+
+                <div id="fase1" class="tab-content active">
+                    <div class="glassmorphic-card p-6 md:p-8 lg:p-12">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center mb-4 md:mb-6">
+                            <div class="brand-gold text-3xl md:text-4xl mr-0 sm:mr-4 mb-2 sm:mb-0"><i class="fas fa-search-dollar"></i></div>
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">Fase 1: Diagnóstico Operativo y Estratégico con IA</h3>
+                        </div>
+                        <p class="text-gray-300 mb-4 text-sm md:text-base">Inmersión profunda para identificar cuellos de botella, ineficiencias y oportunidades clave para la IA. Creamos tu hoja de ruta personalizada.</p>
+                        <ul class="list-disc list-inside text-gray-400 space-y-2 mb-6 text-sm md:text-base">
+                            <li>Análisis de procesos y datos existentes.</li>
+                            <li>Identificación de "Quick Wins" para resultados tempranos.</li>
+                            <li>Entrega de Informe de Diagnóstico y Hoja de Ruta de IA.</li>
+                        </ul>
+                        <p class="text-md md:text-lg font-semibold brand-gold">Inversión: <span class="text-white">$500 - $2,500 USD</span> (Opción gratuita/subsidiada disponible)</p>
+                    </div>
+                </div>
+
+                <div id="fase2" class="tab-content">
+                    <div class="glassmorphic-card p-6 md:p-8 lg:p-12">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center mb-4 md:mb-6">
+                            <div class="brand-gold text-3xl md:text-4xl mr-0 sm:mr-4 mb-2 sm:mb-0"><i class="fas fa-cogs"></i></div>
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">Fase 2: Diseño e Implementación de Soluciones de IA a Medida</h3>
+                        </div>
+                        <p class="text-gray-300 mb-4 text-sm md:text-base">Desarrollamos e implementamos las soluciones de IA definidas, integrándolas fluidamente con tus sistemas existentes.</p>
+                        <ul class="list-disc list-inside text-gray-400 space-y-2 mb-6 text-sm md:text-base">
+                            <li>Diseño detallado y selección de herramientas de IA.</li>
+                            <li>Desarrollo, pruebas rigurosas e integración.</li>
+                            <li>Pilotos y ajustes para asegurar la funcionalidad óptima.</li>
+                        </ul>
+                        <p class="text-md md:text-lg font-semibold brand-gold">Inversión por proyecto: <span class="text-white">$1,500 - $50,000+ USD</span></p>
+                    </div>
+                </div>
+                
+                <div id="fase3" class="tab-content">
+                    <div class="glassmorphic-card p-6 md:p-8 lg:p-12">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center mb-4 md:mb-6">
+                            <div class="brand-gold text-3xl md:text-4xl mr-0 sm:mr-4 mb-2 sm:mb-0"><i class="fas fa-infinity"></i></div>
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">Fase 3: Mantenimiento, Soporte y Evolución Continua</h3>
+                        </div>
+                        <p class="text-gray-300 mb-6 text-sm md:text-base">Aseguramos el funcionamiento óptimo, facilitamos la adopción y te acompañamos en la evolución constante de tus capacidades de IA mediante un modelo de suscripción mensual.</p>
+                        
+                        <div class="accordion-container space-y-3">
+                            <div class="accordion-item glassmorphic-card overflow-hidden border-l-4 brand-gold-border">
+                                <div class="accordion-header p-4 flex justify-between items-center">
+                                    <h4 class="text-lg md:text-xl font-semibold text-white">Nivel Básico: Essential Support</h4>
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content px-4">
+                                    <ul class="list-disc list-inside text-gray-400 space-y-1 text-xs sm:text-sm">
+                                        <li>Soporte técnico reactivo (SLAs definidos).</li>
+                                        <li>Monitoreo básico del rendimiento.</li>
+                                        <li>Actualizaciones menores de software.</li>
+                                        <li>Acceso a base de conocimiento online.</li>
+                                    </ul>
+                                    <p class="text-sm md:text-md font-semibold brand-gold mt-2">Desde: <span class="text-white">$200 - $500 USD/mes</span></p>
+                                </div>
+                            </div>
+                            <div class="accordion-item glassmorphic-card overflow-hidden border-l-4 brand-gold-border">
+                                <div class="accordion-header p-4 flex justify-between items-center">
+                                    <h4 class="text-lg md:text-xl font-semibold text-white">Nivel Intermedio: Growth Partner</h4>
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content px-4">
+                                    <ul class="list-disc list-inside text-gray-400 space-y-1 text-xs sm:text-sm">
+                                        <li>Todo lo del Nivel Básico.</li>
+                                        <li>Soporte técnico proactivo.</li>
+                                        <li>Horas de consultoría dedicadas.</li>
+                                        <li>Informes de rendimiento y ROI detallados.</li>
+                                        <li>Capacitación continua.</li>
+                                    </ul>
+                                    <p class="text-sm md:text-md font-semibold brand-gold mt-2">Desde: <span class="text-white">$500 - $1,500 USD/mes</span></p>
+                                </div>
+                            </div>
+                            <div class="accordion-item glassmorphic-card overflow-hidden border-l-4 brand-gold-border">
+                                <div class="accordion-header p-4 flex justify-between items-center">
+                                    <h4 class="text-lg md:text-xl font-semibold text-white">Nivel Premium: Strategic Evolution</h4>
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content px-4">
+                                    <ul class="list-disc list-inside text-gray-400 space-y-1 text-xs sm:text-sm">
+                                        <li>Todo lo del Nivel Intermedio.</li>
+                                        <li>Gerente de Éxito del Cliente dedicado.</li>
+                                        <li>Revisiones estratégicas periódicas.</li>
+                                        <li>Acceso prioritario a nuevas funcionalidades.</li>
+                                        <li>Mayor número de horas de consultoría.</li>
+                                    </ul>
+                                    <p class="text-sm md:text-md font-semibold brand-gold mt-2">Desde: <span class="text-white">$1,500 - $5,000+ USD/mes</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios-adicionales" class="py-16 md:py-24 lg:py-32">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="section-title reveal futuristic-gradient-text">Potenciamos Tu Crecimiento</h2>
+            <p class="section-subtitle reveal">
+                Más allá de la implementación, te ofrecemos oportunidades para expandir el conocimiento en IA dentro de tu organización y escalar nuestras soluciones a través de nuevos canales.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                <div class="glassmorphic-card p-6 md:p-8 reveal">
+                    <div class="flex items-center mb-3 md:mb-4">
+                        <div class="text-3xl md:text-4xl brand-gold mr-3 md:mr-4"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-white">Capacitación Especializada en IA</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm md:text-base">Ofrecemos talleres y cursos diseñados para diversos roles: desde "IA para Líderes" hasta "Prompt Engineering" y "Alfabetización en Datos", empoderando a tus equipos con habilidades del futuro.</p>
+                    <a href="#contacto" class="font-semibold brand-gold hover:brand-gold-darker text-sm md:text-base">Solicitar Información <i class="fas fa-angle-right ml-1"></i></a>
+                </div>
+                <div class="glassmorphic-card p-6 md:p-8 reveal" style="transition-delay: 0.1s;">
+                    <div class="flex items-center mb-3 md:mb-4">
+                        <div class="text-3xl md:text-4xl brand-gold mr-3 md:mr-4"><i class="fas fa-clone"></i></div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-white">Modelo "White Label" y Alianzas</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm md:text-base">Permitimos a consultores y agencias ofrecer nuestras soluciones bajo su propia marca, ampliando el alcance de la transformación inteligente y creando nuevas oportunidades de negocio conjuntas.</p>
+                    <a href="#contacto" class="font-semibold brand-gold hover:brand-gold-darker text-sm md:text-base">Conviértete en Socio <i class="fas fa-angle-right ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-16 md:py-24 lg:py-32 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 hero-background"></div>
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="max-w-xl mx-auto text-center">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 sm:mb-6 reveal futuristic-gradient-text">¿Listo para Evolucionar?</h2>
+                <p class="text-md sm:text-lg text-gray-300 mb-8 sm:mb-10 reveal">
+                    Hablemos de cómo Cognito puede integrar IA en tu negocio para optimizar procesos, tomar decisiones inteligentes y asegurar un futuro próspero.
+                </p>
+                <form class="reveal" style="transition-delay: 0.2s;">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
+                        <input type="text" placeholder="Tu Nombre" class="w-full p-3 sm:p-4 rounded-lg bg-slate-800 border border-slate-700 text-gray-200 focus:ring-2 focus:border-transparent outline-none transition-all text-sm sm:text-base" style="--tw-ring-color: var(--brand-gold-primary); --tw-border-color: var(--brand-gold-primary);" required>
+                        <input type="email" placeholder="Tu Email" class="w-full p-3 sm:p-4 rounded-lg bg-slate-800 border border-slate-700 text-gray-200 focus:ring-2 focus:border-transparent outline-none transition-all text-sm sm:text-base" style="--tw-ring-color: var(--brand-gold-primary); --tw-border-color: var(--brand-gold-primary);" required>
+                    </div>
+                    <textarea placeholder="Cuéntanos sobre tu empresa y tus desafíos..." rows="4" class="w-full p-3 sm:p-4 mb-6 rounded-lg bg-slate-800 border border-slate-700 text-gray-200 focus:ring-2 focus:border-transparent outline-none transition-all text-sm sm:text-base" style="--tw-ring-color: var(--brand-gold-primary); --tw-border-color: var(--brand-gold-primary);" required></textarea>
+                    <button type="submit" class="contact-button font-bold text-base sm:text-lg px-10 py-3 sm:px-12 sm:py-4 rounded-full transition duration-300 shadow-xl w-full sm:w-auto">
+                        Solicitar Consulta Gratuita
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-10 md:py-12 footer-bg">
+        <div class="container mx-auto px-4 sm:px-6 text-center">
+            <a href="#" class="text-xl md:text-2xl font-bold futuristic-gradient-text mb-3 md:mb-4 inline-block">Cognito</a>
+            <p class="text-xs sm:text-sm text-gray-500 mb-3 md:mb-4">Transformando el futuro de las empresas en Latinoamérica con IA.</p>
+            <div class="flex justify-center space-x-5 md:space-x-6 mb-3 md:mb-4">
+                <a href="#" class="text-gray-400 hover:brand-gold transition duration-300"><i class="fab fa-linkedin fa-lg"></i></a>
+                <a href="#" class="text-gray-400 hover:brand-gold transition duration-300"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" class="text-gray-400 hover:brand-gold transition duration-300"><i class="fab fa-facebook fa-lg"></i></a>
+            </div>
+            <p class="text-xs text-gray-600">&copy; <span id="currentYear"></span> Cognito. Todos los derechos reservados.</p>
+            <p class="text-xs text-gray-600 mt-1">Diseñado con <i class="fas fa-heart brand-gold-darker"></i> para la evolución empresarial.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                if (targetElement) {
+                     targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+                if (mobileMenu.classList.contains('hidden') === false) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Current Year for Footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Reveal on Scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.05 }); 
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Tabs for Metodología Section
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.dataset.tab;
+
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+
+
+                tabContents.forEach(content => {
+                    if (content.id === targetTab) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+            });
+        });
+        
+        // Accordion
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            header.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+    </script>
+</body>
+</html>
