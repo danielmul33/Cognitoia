@@ -15,10 +15,10 @@
             --brand-gold-darker: #B8860B;   /* DarkGoldenRod, para acentos y sombras */
             
             --brand-background: #000000; /* Fondo negro sólido */
-            --brand-card-bg: rgba(20, 20, 20, 0.65); /* Fondo de tarjeta oscuro con más opacidad */
-            --brand-text-light: #F3F4F6; /* Gris-100 para texto principal */
-            --brand-text-medium: #A0AEC0; /* Gris más azulado para subtítulos */
-            --brand-text-dark: #4A5568;  /* Gris oscuro azulado */
+            --brand-card-bg: rgba(20, 20, 20, 0.65); 
+            --brand-text-light: #F3F4F6; 
+            --brand-text-medium: #A0AEC0; 
+            --brand-text-dark: #4A5568;  
         }
 
         body {
@@ -27,8 +27,46 @@
             color: var(--brand-text-light);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            position: relative; /* Necesario para el z-index del fondo del logo */
         }
-        /* Clases para la nueva paleta de oro */
+
+        /* Contenedor para el logo de fondo */
+        #background-logo-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -10; /* Detrás de todo el contenido */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Evita scrollbars si el logo es muy grande */
+        }
+
+        #background-logo-container img {
+            width: 65vw; /* Ajusta el tamaño del logo de fondo como necesites */
+            max-width: 800px; /* Límite para que no sea excesivamente grande en pantallas anchas */
+            height: auto;
+            opacity: 0.03; /* Muy sutil para no interferir con el contenido */
+            object-fit: contain;
+            filter: grayscale(100%) brightness(150%); /* Lo hace monocromático y un poco más brillante para mezclarse */
+            animation: slowPulse 12s infinite ease-in-out;
+            transform-origin: center center;
+        }
+
+        @keyframes slowPulse {
+            0%, 100% { 
+                opacity: 0.02;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.04; 
+                transform: scale(1.03);
+            }
+        }
+
+
         .brand-gold { color: var(--brand-gold-primary); }
         .brand-gold-bg { background-color: var(--brand-gold-primary); }
         .brand-gold-border { border-color: var(--brand-gold-primary); }
@@ -37,13 +75,12 @@
         .brand-gold-darker { color: var(--brand-gold-darker); }
         .brand-gold-darker-bg { background-color: var(--brand-gold-darker); }
 
-
         .glassmorphic-card {
             background: var(--brand-card-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(212, 175, 55, 0.25); /* Borde dorado principal sutil */
-            border-radius: 0.75rem; /* 12px */
+            border: 1px solid rgba(212, 175, 55, 0.25); 
+            border-radius: 0.75rem; 
         }
 
         .futuristic-gradient-text {
@@ -55,33 +92,31 @@
         }
 
         .section-title {
-            font-size: 2.25rem; /* Ajustado para móvil, Tailwind lg:text-4xl */
+            font-size: 2.25rem; 
             font-weight: 800;
-            margin-bottom: 1rem; /* Ajustado para móvil */
+            margin-bottom: 1rem; 
             text-align: center;
         }
-        @media (min-width: 768px) { /* md breakpoint */
+        @media (min-width: 768px) { 
             .section-title {
-                font-size: 2.5rem; /* 40px */
-                margin-bottom: 1.5rem; /* 24px */
+                font-size: 2.5rem; 
+                margin-bottom: 1.5rem; 
             }
         }
         .section-subtitle {
-            font-size: 1rem; /* Ajustado para móvil, Tailwind md:text-xl */
+            font-size: 1rem; 
             color: var(--brand-text-medium);
             text-align: center;
             max-width: 700px;
-            margin: 0 auto 2rem; /* Ajustado para móvil */
+            margin: 0 auto 2rem; 
         }
-         @media (min-width: 768px) { /* md breakpoint */
+         @media (min-width: 768px) { 
             .section-subtitle {
-                font-size: 1.125rem; /* 18px */
-                 margin: 0 auto 3rem; /* 48px */
+                font-size: 1.125rem; 
+                 margin: 0 auto 3rem; 
             }
         }
 
-
-        /* Animaciones sutiles */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -92,14 +127,13 @@
             transform: translateY(0);
         }
         
-        /* Estilo para tabs */
         .tab-button.active {
             background-color: var(--brand-gold-primary);
-            color: var(--brand-background); /* Texto negro sobre fondo oro */
+            color: var(--brand-background); 
         }
         .tab-button {
             transition: all 0.3s ease;
-            color: var(--brand-gold-primary); /* Color de texto para tabs inactivas */
+            color: var(--brand-gold-primary); 
         }
         .tab-button:hover {
             background-color: var(--brand-gold-lighter);
@@ -112,7 +146,6 @@
             display: block;
         }
 
-        /* Estilo para acordeón */
         .accordion-header {
             cursor: pointer;
             transition: background-color 0.3s ease;
@@ -123,7 +156,7 @@
             transition: max-height 0.5s ease-out, padding 0.5s ease-out;
         }
         .accordion-item.active .accordion-content {
-            max-height: 7000px; /* Aumentado para textos largos, asegurar que no se corte */
+            max-height: 7000px; 
             padding-top: 1rem;
             padding-bottom: 1rem;
         }
@@ -143,27 +176,42 @@
         }
         .contact-button {
             background-color: var(--brand-gold-primary);
-            color: var(--brand-background); /* Texto oscuro para contraste */
+            color: var(--brand-background); 
         }
         .contact-button:hover {
             background-color: var(--brand-gold-darker);
             color: var(--brand-text-light);
         }
         .hero-background {
+            /* La imagen de fondo del hero se mantiene, el logo de fondo es global */
             background-image: url('https://placehold.co/1920x1080/000000/1C1C1C?text=Universo+Digital+Abstracto');
         }
         .footer-bg {
             background-color: #0A0A0A; 
             border-top: 1px solid var(--brand-gold-darker);
         }
+        .navbar-logo {
+            max-height: 40px; 
+        }
+        @media (min-width: 768px) {
+            .navbar-logo {
+                max-height: 48px; 
+            }
+        }
 
     </style>
 </head>
 <body class="antialiased">
 
+    <div id="background-logo-container">
+        <img src="https://github.com/danielmul33/logocognito/blob/main/D18E0756-E128-496F-9A0C-A5EC6DF9CAB7.PNG?raw=true" alt="Cognito Background Logo">
+    </div>
+
     <nav class="fixed top-0 left-0 right-0 z-50 py-3 bg-opacity-80 backdrop-blur-md shadow-lg" style="background-color: rgba(0,0,0,0.75);">
         <div class="container mx-auto px-4 sm:px-6 flex justify-between items-center">
-            <a href="#" class="text-2xl md:text-3xl font-bold futuristic-gradient-text">Cognito</a>
+            <a href="#" class="block">
+                <img src="https://github.com/danielmul33/logocognito/blob/main/D18E0756-E128-496F-9A0C-A5EC6DF9CAB7.PNG?raw=true" alt="Cognito Logo" class="navbar-logo">
+            </a>
             <div class="hidden md:flex space-x-4 lg:space-x-6 items-center">
                 <a href="#filosofia" class="nav-link transition duration-300 text-sm lg:text-base">Filosofía</a>
                 <a href="#metodologia" class="nav-link transition duration-300 text-sm lg:text-base">Metodología</a>
@@ -184,11 +232,13 @@
         </div>
     </nav>
 
-    <header class="min-h-screen flex items-center justify-center pt-20 bg-cover bg-center relative hero-background">
+    <header class="min-h-screen flex flex-col items-center justify-center pt-24 sm:pt-20 bg-cover bg-center relative hero-background">
         <div class="absolute inset-0 bg-black opacity-70"></div>
         <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
+            <img src="https://github.com/danielmul33/logocognito/blob/main/D18E0756-E128-496F-9A0C-A5EC6DF9CAB7.PNG?raw=true" alt="Cognito Logo" class="h-20 sm:h-24 md:h-28 mx-auto mb-4 sm:mb-6 reveal">
+            
             <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4 sm:mb-6 reveal">
-                <span class="futuristic-gradient-text"></span> Evoluciona Tu Empresa con Inteligencia Artificial
+                 Evoluciona Tu Empresa con Inteligencia Artificial
             </h1>
             <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 sm:mb-10 max-w-md sm:max-w-xl md:max-w-3xl mx-auto reveal" style="transition-delay: 0.2s;">
                 Transformamos negocios tradicionales en Latinoamérica, integrando IA de forma personalizada, ética y rentable. No solo tecnología, sino una asociación estratégica para tu futuro.
@@ -390,7 +440,9 @@
 
     <footer class="py-10 md:py-12 footer-bg">
         <div class="container mx-auto px-4 sm:px-6 text-center">
-            <a href="#" class="text-xl md:text-2xl font-bold futuristic-gradient-text mb-3 md:mb-4 inline-block">Cognito</a>
+            <a href="#" class="inline-block mb-3 md:mb-4">
+                <img src="https://github.com/danielmul33/logocognito/blob/main/D18E0756-E128-496F-9A0C-A5EC6DF9CAB7.PNG?raw=true" alt="Cognito Logo" class="h-10 sm:h-12 mx-auto">
+            </a>
             <p class="text-xs sm:text-sm text-gray-500 mb-3 md:mb-4">Transformando el futuro de las empresas en Latinoamérica con IA.</p>
             <div class="flex justify-center space-x-5 md:space-x-6 mb-3 md:mb-4">
                 <a href="#" class="text-gray-400 hover:brand-gold transition duration-300"><i class="fab fa-linkedin fa-lg"></i></a>
